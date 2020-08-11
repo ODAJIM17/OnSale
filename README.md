@@ -1,2 +1,2 @@
 # OnSale
-To sell products on-line 
+Project to sell products on-line 
