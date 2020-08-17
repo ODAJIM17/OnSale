@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnSale.Web.Data;
+using OnSale.Web.Helpers;
 
 namespace OnSale.Web
 {
@@ -34,6 +35,8 @@ namespace OnSale.Web
             });
 
             services.AddTransient<SeedDb>();
+            services.AddScoped<IBlobHelper, BlobHelper>();
+            services.AddScoped<IConverterHelper, ConverterHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

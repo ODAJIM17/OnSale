@@ -201,15 +201,16 @@ namespace OnSale.Web.Controllers
                     country.Departments.Add(department);
                     _context.Update(country);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction($"{nameof(Details)}/{country.Id}");
+                   // return RedirectToAction($"{nameof(Details)}/{country.Id}");
                     //RedirectToAction("Details","Countries", new {id = country.Id});
-                   
+                    return RedirectToAction("Details", new { country.Id });
+
                 }
                 catch (DbUpdateException dbUpdateException)
                 {
                     if (dbUpdateException.InnerException.Message.Contains("duplicate"))
                     {
-                        ModelState.AddModelError(string.Empty, "There are a record with the same name.");
+                        ModelState.AddModelError(string.Empty, "There is already a record with the same name.");
                     }
                     else
                     {
@@ -317,7 +318,8 @@ namespace OnSale.Web.Controllers
             Country country = await _context.Countries.FirstOrDefaultAsync(c => c.Departments.FirstOrDefault(d => d.Id == department.Id) != null);
             _context.Departments.Remove(department);
             await _context.SaveChangesAsync();
-            return RedirectToAction($"{nameof(Details)}/{country.Id}");
+           // return RedirectToAction($"{nameof(Details)}/{country.Id}");
+            return RedirectToAction("Details", new { country.Id });
         }
 
 
@@ -358,14 +360,15 @@ namespace OnSale.Web.Controllers
                     department.Cities.Add(city);
                     _context.Update(department);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction($"{nameof(DetailsDepartment)}/{department.Id}");
+                   // return RedirectToAction($"{nameof(DetailsDepartment)}/{department.Id}");
+                    return RedirectToAction("DetailsDepartment", new { department.Id });
 
                 }
                 catch (DbUpdateException dbUpdateException)
                 {
                     if (dbUpdateException.InnerException.Message.Contains("duplicate"))
                     {
-                        ModelState.AddModelError(string.Empty, "There are a record with the same name.");
+                        ModelState.AddModelError(string.Empty, "There is already a record with the same name.");
                     }
                     else
                     {
@@ -410,14 +413,16 @@ namespace OnSale.Web.Controllers
                 {
                     _context.Update(city);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction($"{nameof(DetailsDepartment)}/{city.IdDepartment}");
+                    //return RedirectToAction($"{nameof(DetailsDepartment)}/{city.IdDepartment}");
+                    return RedirectToAction("DetailsDepartment", new { city.IdDepartment });
+
 
                 }
                 catch (DbUpdateException dbUpdateException)
                 {
                     if (dbUpdateException.InnerException.Message.Contains("duplicate"))
                     {
-                        ModelState.AddModelError(string.Empty, "There are a record with the same name.");
+                        ModelState.AddModelError(string.Empty, "There is already a record with the same name.");
                     }
                     else
                     {
@@ -450,7 +455,8 @@ namespace OnSale.Web.Controllers
             Department department = await _context.Departments.FirstOrDefaultAsync(d => d.Cities.FirstOrDefault(c => c.Id == city.Id) != null);
             _context.Cities.Remove(city);
             await _context.SaveChangesAsync();
-            return RedirectToAction($"{nameof(DetailsDepartment)}/{department.Id}");
+           // return RedirectToAction($"{nameof(DetailsDepartment)}/{department.Id}");
+            return RedirectToAction("DetailsDepartment", new { department.Id });
         }
 
 
