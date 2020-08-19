@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using OnSale.Common.Requests;
 using OnSale.Web.Data.Entities;
 using OnSale.Web.Helpers;
 using OnSale.Web.Models;
