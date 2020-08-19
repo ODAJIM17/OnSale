@@ -1,0 +1,53 @@
+﻿@model OnSale.Web.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="col-md-6 offset-md-3 mt-4">
+    <div class="card bg-light mb-3" style="max-width: 50rem;">
+
+        <h5 class="card-header text-center">Sign in with your E-Mail Account</h5>
+        <div class="card-body">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Username">Email Address</label>
+                    <input asp-for="Username" required class="form-control" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password">Password</label>
+                    <input asp-for="Password" required type="password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input asp-for="RememberMe" type="checkbox" class="form-check-input" />
+                        <label asp-for="RememberMe" class="form-check-label">Remember Me?</label>
+                    </div>
+                    <span asp-validation-for="RememberMe" class="text-danger"></span>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <button input type="submit" value="Login" class="btn btn-primary btn-block"><i class="fa fa-user"></i> Login</button>
+                    </div>
+                    @*<a asp-action="Register" class="btn btn-outline-success">Register New User</a>*@
+                    <div class="form-group col-md-6">
+                        <a asp-action="RecoverPasswordMVC" class="btn btn-secondary btn-block"><i class="fa fa-search-plus"></i> Forgot your password?</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="card-footer bg-transparent text-center">
+
+            Don't have an account?<a asp-action="Register" class="btn btn-link">Sign up now</a>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
