@@ -76,10 +76,12 @@
     <script src="~/js/jquery.dataTables.min.js"></script>
     <script src="~/font-awesome/js/fontawesome.js"></script>
     <script>
+
         function displayBusyIndicator() {
             $('.loading').show();
         }
     </script>
+
     <script>
         $(window).on('beforeunload', function () {
             displayBusyIndicator();
@@ -90,6 +92,7 @@
             displayBusyIndicator();
         })
     </script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>
