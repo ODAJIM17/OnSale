@@ -6,6 +6,7 @@ using Xamarin.Essentials.Interfaces;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Forms;
 using OnSale.Common.Services;
+using Syncfusion.Licensing;
 
 namespace OnSale.Prism
 {
@@ -18,6 +19,7 @@ namespace OnSale.Prism
 
         protected override async void OnInitialized()
         {
+            SyncfusionLicenseProvider.RegisterLicense("MzEzNDEyQDMxMzgyZTMyMmUzMFVXYlRwMTh2ZWJxUHoxdDhKcFQwWG52ZmVPdzdiOHFzbEZBM3VxU1ZvUlk9");
             InitializeComponent();
 
             await NavigationService.NavigateAsync($"NavigationPage/{nameof(ProductsPage)}");

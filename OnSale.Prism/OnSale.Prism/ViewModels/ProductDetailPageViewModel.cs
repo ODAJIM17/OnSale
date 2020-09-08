@@ -4,6 +4,7 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace OnSale.Prism.ViewModels
@@ -11,10 +12,17 @@ namespace OnSale.Prism.ViewModels
     public class ProductDetailPageViewModel : ViewModelBase
     {
         private Product _product;
+        private ObservableCollection<ProductImage> _images;
         public ProductDetailPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
             Title = "Product";
+        }
+
+        public ObservableCollection<ProductImage> Images
+        {
+            get => _images;
+            set => SetProperty(ref _images, value);
         }
 
         public Product Product
@@ -31,6 +39,7 @@ namespace OnSale.Prism.ViewModels
             {
                 Product = parameters.GetValue<Product>("product");
                 Title = Product.Name;
+                Images = new ObservableCollection<ProductImage>(Product.ProductImages);
             }
         }
     }

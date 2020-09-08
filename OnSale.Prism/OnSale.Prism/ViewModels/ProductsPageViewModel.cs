@@ -71,7 +71,7 @@ namespace OnSale.Prism.ViewModels
                 url,
                 "/api",
                 "/Products");
-          
+           IsRunning = false;
 
             if (!response.IsSuccess)
             {
@@ -82,7 +82,7 @@ namespace OnSale.Prism.ViewModels
                 return;
             }
 
-             IsRunning = false;
+            
 
             _myProducts = (List<Product>)response.Result;
             ShowProducts();
