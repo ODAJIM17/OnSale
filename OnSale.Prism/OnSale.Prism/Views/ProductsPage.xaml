@@ -8,6 +8,7 @@
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="OnSale.Prism.Views.ProductsPage"
+             BackgroundColor="{StaticResource ColorBackground}"
              Title="{Binding Title}">
 
     <AbsoluteLayout>
@@ -63,9 +64,9 @@
         <busyindicator:SfBusyIndicator AnimationType="Gear" 
                                        AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
                 	                   AbsoluteLayout.LayoutFlags="All"
-                	                   BackgroundColor="Silver"
+                	                   BackgroundColor="{StaticResource ColorAccent}"
                 	                   HorizontalOptions="Center"
-                	                   TextColor="White"
+                	                   TextColor="{StaticResource ColorFontInverse}"
                 	                   IsBusy="{Binding IsRunning}"
                 	                   Title="Loading..."
                 	                   VerticalOptions="Center"

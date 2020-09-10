@@ -1,4 +1,5 @@
-﻿using OnSale.Common.Responses;
+﻿using OnSale.Common.Requests;
+using OnSale.Common.Responses;
 using System.Threading.Tasks;
 
 namespace OnSale.Common.Services
@@ -7,6 +8,6 @@ namespace OnSale.Common.Services
     {
         Task<Response> GetListAsync<T>(string urlBase, string servicePrefix, string controller);
 
-        
+        Task<Response> GetTokenAsync(string urlBase, string servicePrefix, string controller, TokenRequest request);
     }
 }

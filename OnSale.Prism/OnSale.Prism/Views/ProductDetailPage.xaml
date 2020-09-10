@@ -8,6 +8,7 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"  
              ios:Page.UseSafeArea="true"
              x:Class="OnSale.Prism.Views.ProductDetailPage"
+             BackgroundColor="{StaticResource ColorBackground}"
              Title="{Binding Title}">
 
     <StackLayout Padding="5">
@@ -88,11 +89,10 @@
                 </Grid>
             </StackLayout>
         </ScrollView>
-        <Button BackgroundColor="Navy"
+        <Button 
                 Command="{Binding AddToCartBinding}" 
                 CornerRadius="10"
                 Text="Add to cart"
-                TextColor="White"
                 VerticalOptions="EndAndExpand"/>
     </StackLayout>
 
