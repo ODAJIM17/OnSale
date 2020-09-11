@@ -30,7 +30,7 @@ namespace OnSale.Web.Helpers
 
             list.Insert(0, new SelectListItem
             {
-                Text = "[Select a category...]",
+                Text = "Select a category...",
                 Value = "0"
             });
 
@@ -56,7 +56,7 @@ namespace OnSale.Web.Helpers
 
             list.Insert(0, new SelectListItem
             {
-                Text = "[Select a city...]",
+                Text = "Select a city...",
                 Value = "0"
             });
 
@@ -75,7 +75,7 @@ namespace OnSale.Web.Helpers
 
             list.Insert(0, new SelectListItem
             {
-                Text = "[Select a country...]",
+                Text = "Select a country...",
                 Value = "0"
             });
 
@@ -101,7 +101,7 @@ namespace OnSale.Web.Helpers
 
             list.Insert(0, new SelectListItem
             {
-                Text = "[Select a department...]",
+                Text = "Select a department...",
                 Value = "0"
             });
 
