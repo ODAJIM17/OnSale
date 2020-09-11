@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnSale.Common.Entities;
 using OnSale.Web.Data;
+using OnSale.Web.Data.Entities;
 
 namespace OnSale.Web.Controllers.API
 {
@@ -22,12 +23,15 @@ namespace OnSale.Web.Controllers.API
         }
 
         [HttpGet]
-        public IActionResult GetProducts()
+        public async Task<IActionResult> GetProducts()
         {
-            return Ok(_context.Products
-                  .Include(p => p.Category)
-                  .Include(p => p.ProductImages)
-                  .OrderBy(p => p.Name));
+            List<Product> products = await _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.ProductImages)
+                .Include(p => p.Qualifications)
+                .Where(p => p.IsActive)
+                .ToListAsync();
+            return Ok(products);
         }
     }
 }

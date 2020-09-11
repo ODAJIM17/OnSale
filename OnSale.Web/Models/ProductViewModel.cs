@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OnSale.Common.Entities;
+using OnSale.Web.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

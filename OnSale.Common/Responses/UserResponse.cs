@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace OnSale.Common.Requests
+namespace OnSale.Common.Responses
 {
     public class UserResponse
     {
