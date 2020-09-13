@@ -209,6 +209,8 @@ namespace OnSale.Web.Controllers
                 return NotFound();
             }
 
+            ViewBag.ProductName = product.Name;
+
             return View(product);
         }
 

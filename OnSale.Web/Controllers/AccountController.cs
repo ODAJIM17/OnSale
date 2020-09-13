@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnSale.Common.Entities;
 using OnSale.Common.Enums;
@@ -200,7 +201,7 @@ namespace OnSale.Web.Controllers
                     $"plase click in this link:<p><a href = \"{tokenLink}\">Confirm Email</a></p>");
                 if (response.IsSuccess)
                 {
-                    ViewBag.Message = "The instructions to allow your user has been sent to email.";
+                    ViewBag.Message = "The instructions to login has been sent to email.";
                     return View(model);
                 }
 
@@ -212,6 +213,7 @@ namespace OnSale.Web.Controllers
             model.Cities = _combosHelper.GetComboCities(model.DepartmentId);
             return View(model);
         }
+
 
         public JsonResult GetDepartments(int countryId)
         {
@@ -238,6 +240,7 @@ namespace OnSale.Web.Controllers
 
             return Json(department.Cities.OrderBy(c => c.Name));
         }
+
 
         public async Task<IActionResult> ChangeUser()
         {

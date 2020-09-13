@@ -5,10 +5,10 @@
 }
 
 
-<h2>Details</h2>
+<h4>Details for  @ViewBag.ProductName</h4>
 
 <div>
-    <h4>Product</h4>
+   
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -139,7 +139,7 @@
                     <tbody>
                         @foreach (var item in Model.Qualifications)
                         {
-                            <tr>
+                            <tr style="font-family:Tahoma;font-size:12px">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.DateLocal)
                                 </td>

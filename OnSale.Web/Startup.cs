@@ -60,6 +60,10 @@ namespace OnSale.Web
                });
 
 
+             services.AddControllers().AddNewtonsoftJson(options =>
+             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+
 
             services.AddTransient<SeedDb>();
             services.AddScoped<IBlobHelper, BlobHelper>();
