@@ -150,10 +150,12 @@ namespace OnSale.Web.Controllers
             {
                 _context.Categories.Remove(category);
                 await _context.SaveChangesAsync();
+                ViewBag.Message = "Category was deleted successfully.";
             }
             catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, ex.Message);
+            { 
+                ModelState.AddModelError(string.Empty, "The category can't be deleted because it has related records." + ex.ToString());
+               // ModelState.AddModelError(string.Empty, ex.Message);
             }
 
             return RedirectToAction(nameof(Index));
