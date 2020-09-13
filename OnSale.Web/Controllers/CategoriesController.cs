@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnSale.Common.Entities;
@@ -7,11 +8,12 @@ using OnSale.Web.Helpers;
 using OnSale.Web.Models;
 using System;
 using System.Threading.Tasks;
+using static OnSale.Common.Enums.Enum;
 
 namespace OnSale.Web.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class CategoriesController : Controller
+    public class CategoriesController :  BaseController
     {
         private readonly DataContext _context;
         private readonly IBlobHelper _blobHelper;
@@ -24,6 +26,7 @@ namespace OnSale.Web.Controllers
         }
         public async Task<IActionResult> Index()
         {
+            
             return View(await _context.Categories.ToListAsync());
         }
 
@@ -150,10 +153,13 @@ namespace OnSale.Web.Controllers
             {
                 _context.Categories.Remove(category);
                 await _context.SaveChangesAsync();
-                ViewBag.Message = "Category was deleted successfully.";
+                Alert("Category was deleted successfully.", NotificationType.success);
+                
+               
             }
             catch (Exception ex)
-            { 
+            {
+                Alert("This category can nott be deleted because it has related records.", NotificationType.error);
                 ModelState.AddModelError(string.Empty, "The category can't be deleted because it has related records." + ex.ToString());
                // ModelState.AddModelError(string.Empty, ex.Message);
             }

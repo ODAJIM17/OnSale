@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="~/font-awesome/css/all.min.css" />
     <link rel="stylesheet" href="~/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
+    <link href="~/lib/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap-sweetalert/sweetalert.js"></script>
+
 </head>
 <body>
     <header>
@@ -63,21 +67,24 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            <partial name="_BusyIndicatorPartial" />   
+            <partial name="_NotificationPanel" />
+            <partial name="_BusyIndicatorPartial" />
             @RenderBody()
         </main>
     </div>
 
     @*<footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - OnSale.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>*@
+            <div class="container">
+                &copy; 2020 - OnSale.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/jquery.dataTables.min.js"></script>
     <script src="~/font-awesome/js/fontawesome.js"></script>
+
+   
     <script>
 
         function displayBusyIndicator() {
