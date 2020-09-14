@@ -4,12 +4,9 @@ using System.Text;
 
 namespace OnSale.Common.Enums
 {
-    public enum OrderStatus
+    public enum PaymentMethod
     {
-        Pending,
-        Shipping,
-        Sent,
-        Confirmed,
-        Cancelled
+        Cash,
+        CreditCard
     }
 }

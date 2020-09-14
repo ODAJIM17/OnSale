@@ -10,11 +10,12 @@ using OnSale.Web.Data;
 using OnSale.Web.Data.Entities;
 using OnSale.Web.Helpers;
 using OnSale.Web.Models;
+using static OnSale.Common.Enums.Enum;
 
 namespace OnSale.Web.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         private readonly DataContext _context;
         private readonly IBlobHelper _blobHelper;
@@ -182,10 +183,12 @@ namespace OnSale.Web.Controllers
             {
                 _context.Products.Remove(product);
                 await _context.SaveChangesAsync();
+                Alert("Category was deleted successfully.", NotificationType.success);
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, ex.Message);
+                Alert("This category can not be deleted because it has related records.", NotificationType.error);
+                ModelState.AddModelError(string.Empty, "The category can't be deleted because it has related records." + ex.ToString());
             }
 
             return RedirectToAction(nameof(Index));

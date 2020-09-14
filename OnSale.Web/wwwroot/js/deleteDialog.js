@@ -19,6 +19,7 @@
         } else {
             textEvent = "#" + modalName;
         }
+        
         $(textEvent).click((e) => {
             item_to_delete = e.currentTarget.dataset.id;
             deleteItem(sourceEvent, deletePath, eventClassOrId);

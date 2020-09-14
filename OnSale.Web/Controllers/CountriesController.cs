@@ -6,11 +6,12 @@ using OnSale.Web.Data;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using static OnSale.Common.Enums.Enum;
 
 namespace OnSale.Web.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class CountriesController : Controller
+    public class CountriesController : BaseController
     {
         private readonly DataContext _context;
 
@@ -160,8 +161,20 @@ namespace OnSale.Web.Controllers
                 return NotFound();
             }
 
-            _context.Countries.Remove(country);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Countries.Remove(country);
+                await _context.SaveChangesAsync();
+                Alert("Country was deleted successfully.", NotificationType.success);
+            }
+            catch
+            {
+
+                Alert("This country can not be deleted because it has related records.", NotificationType.error);
+                //ModelState.AddModelError(string.Empty, "The category can't be deleted because it has related records." + ex.ToString());
+                // ModelState.AddModelError(string.Empty, ex.Message);
+            }
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -257,7 +270,9 @@ namespace OnSale.Web.Controllers
                 {
                     _context.Update(department);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction($"{nameof(Details)}/{department.IdCountry}");
+                    //return RedirectToAction($"{nameof(Details)}/{department.IdCountry}");
+                    return RedirectToAction("Details", new { department.IdCountry });
+
                 }
                 catch (DbUpdateException dbUpdateException)
                 {
