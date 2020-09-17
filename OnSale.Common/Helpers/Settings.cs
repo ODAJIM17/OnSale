@@ -8,6 +8,7 @@ namespace OnSale.Common.Helpers
         private const string _token = "token";
         private const string _isLogin = "isLogin";
         private const string _product = "product";
+      
         private static readonly string _stringDefault = string.Empty;
         private static readonly bool _boolDefault = false;
 
@@ -18,8 +19,10 @@ namespace OnSale.Common.Helpers
             get => AppSettings.GetValueOrDefault(_token, _stringDefault);
             set => AppSettings.AddOrUpdateValue(_token, value);
         }
+    
 
-        public static bool IsLogin
+
+    public static bool IsLogin
         {
             get => AppSettings.GetValueOrDefault(_isLogin, _boolDefault);
             set => AppSettings.AddOrUpdateValue(_isLogin, value);

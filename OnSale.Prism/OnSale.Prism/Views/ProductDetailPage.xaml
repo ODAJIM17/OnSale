@@ -4,16 +4,35 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
              xmlns:syncfusion="clr-namespace:Syncfusion.SfRotator.XForms;assembly=Syncfusion.SfRotator.XForms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"  
-             ios:Page.UseSafeArea="true"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
              x:Class="OnSale.Prism.Views.ProductDetailPage"
              BackgroundColor="{StaticResource ColorBackground}"
+             IconImageSource="ic_action_card_giftcard"
              Title="{Binding Title}">
 
     <StackLayout Padding="5">
         <ScrollView>
             <StackLayout>
+                <StackLayout HorizontalOptions="Center"
+                             Orientation="Horizontal">
+                    <Label Text="Qualification"
+                            VerticalOptions="Center"/>
+                    <Label FontAttributes="Bold"
+                            FontSize="Large"
+                            Text="{Binding Product.Qualification, StringFormat='{0:N2}'}"/>
+                    <Label Text="Qualification Number"
+                            VerticalOptions="Center"/>
+                    <Label FontAttributes="Bold"
+                            FontSize="Large"
+                            Text="{Binding Product.ProductQualifications, StringFormat='{0:N0}'}"/>
+                </StackLayout>
+                <rating:SfRating IsEnabled="False"
+                                 HorizontalOptions="Center"
+                                 Precision="Exact"
+                                 Value="{Binding Product.Qualification}"/>
                 <syncfusion:SfRotator EnableAutoPlay="True"  
                                       EnableLooping="True"
                                       HeightRequest="300"
@@ -89,12 +108,12 @@
                 </Grid>
             </StackLayout>
         </ScrollView>
-        <Button 
+        <Button BackgroundColor="Navy"
                 Command="{Binding AddToCartBinding}" 
                 CornerRadius="10"
                 Text="Add to cart"
+                TextColor="White"
                 VerticalOptions="EndAndExpand"/>
     </StackLayout>
-
 
 </ContentPage>

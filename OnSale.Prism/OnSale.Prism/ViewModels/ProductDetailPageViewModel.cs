@@ -12,7 +12,7 @@ namespace OnSale.Prism.ViewModels
         public ProductDetailPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            Title = "Product";
+            Title = "Details";
         }
 
         public ObservableCollection<ProductImage> Images

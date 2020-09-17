@@ -22,6 +22,7 @@ namespace OnSale.Prism.iOS
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             new SfBusyIndicatorRenderer();
             new SfRotatorRenderer();
+            SfRatingRenderer.Init();
             return base.FinishedLaunching(app, options);
         }
     }

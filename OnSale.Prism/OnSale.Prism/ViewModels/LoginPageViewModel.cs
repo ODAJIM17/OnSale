@@ -17,6 +17,8 @@ namespace OnSale.Prism.ViewModels
         private bool _isRunning;
         private bool _isEnabled;
         private string _password;
+        private string _pageReturn;
+
         private DelegateCommand _loginCommand;
         private DelegateCommand _registerCommand;
         private DelegateCommand _forgotPasswordCommand;
@@ -57,6 +59,16 @@ namespace OnSale.Prism.ViewModels
         }
         public object response { get; private set; }
 
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+            if (parameters.ContainsKey("pageReturn"))
+            {
+                _pageReturn = parameters.GetValue<string>("pageReturn");
+            }
+        }
+
+
         private async void LoginAsync()
         {
             if (string.IsNullOrEmpty(Email))
@@ -88,7 +100,7 @@ namespace OnSale.Prism.ViewModels
                 IsEnabled = true;
                 await App.Current.MainPage.DisplayAlert(
                     "Error",
-                    "Check your internet connection", 
+                    "Please check your internet connection", 
                     "Ok");
                 return;
             }
@@ -117,23 +129,35 @@ namespace OnSale.Prism.ViewModels
             TokenResponse token = (TokenResponse)response.Result;
             Settings.Token = JsonConvert.SerializeObject(token);
             Settings.IsLogin = true;
+            Password = string.Empty;
 
             IsRunning = false;
             IsEnabled = true;
 
-            await _navigationService.NavigateAsync($"/{nameof(OnSaleMasterDetailPage)}/NavigationPage/{nameof(ProductsPage)}");
-            Password = string.Empty;
+            if (string.IsNullOrEmpty(_pageReturn))
+            {
+                await _navigationService.NavigateAsync($"/{nameof(OnSaleMasterDetailPage)}/NavigationPage/{nameof(ProductsPage)}");
+            }
+            else
+            {
+                await _navigationService.NavigateAsync($"/{nameof(OnSaleMasterDetailPage)}/NavigationPage/{_pageReturn}");
+            }       
         }
 
 
-    private void ForgotPasswordAsync()
+    private async void ForgotPasswordAsync()
         {
-            //TODO: Pending
+            NavigationParameters parameters = new NavigationParameters
+            {
+                { "email", Email }
+            };
+
+            await _navigationService.NavigateAsync(nameof(RecoverPasswordPage), parameters);
         }
 
-        private void RegisterAsync()
+        private async void RegisterAsync()
         {
-            //TODO: Pending
+            await _navigationService.NavigateAsync(nameof(RegisterPage));
         }
     }
 }
