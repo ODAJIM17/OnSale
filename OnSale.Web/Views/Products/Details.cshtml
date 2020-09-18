@@ -152,21 +152,27 @@
 
                                 <td>
                                     @{
-                                        string[] noteWords = item.Remarks.Split(' ');
-                                        if (noteWords.Count() > 7)
+                                        if (item.Remarks != null)
                                         {
-                                            <a class="" role="button" data-toggle="collapse" href="#collapseSum@(item.Id)" aria-expanded="false" aria-controls="collapseSum@(item.Id)">
-                                                @(string.Join(" ", noteWords.Take(7)) + "...")
-                                            </a>
-                                            <div class="collapse" id="collapseSum@(item.Id)">
-                                                <div class="well">
-                                                    @(string.Join(" ", noteWords.Skip(7)))
+                                            string[] noteWords = item.Remarks.Split(' ');
+                                            if (noteWords.Count() > 7)
+                                            {
+                                                <a class="" role="button" data-toggle="collapse" href="#collapseSum@(item.Id)" aria-expanded="false" aria-controls="collapseSum@(item.Id)">
+                                                    @(string.Join(" ", noteWords.Take(7)) + "...")
+                                                </a>
+                                                <div class="collapse" id="collapseSum@(item.Id)">
+                                                    <div class="well">
+                                                        @(string.Join(" ", noteWords.Skip(7)))
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            }
                                         }
+
+
                                         else
                                         {
-                                            @item.Remarks
+                                            @Html.DisplayFor(modelItem => item.Remarks)
+
                                         }
                                     }
                                 </td>
