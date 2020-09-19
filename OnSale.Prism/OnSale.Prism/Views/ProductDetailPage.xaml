@@ -109,7 +109,7 @@
             </StackLayout>
         </ScrollView>
         <Button BackgroundColor="Navy"
-                Command="{Binding AddToCartBinding}" 
+                Command="{Binding AddToCartCommand}" 
                 CornerRadius="10"
                 Text="Add to cart"
                 TextColor="White"

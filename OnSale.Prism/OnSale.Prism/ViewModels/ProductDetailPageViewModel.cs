@@ -1,20 +1,30 @@
 ﻿using OnSale.Common.Entities;
 using OnSale.Common.Responses;
+using OnSale.Prism.Views;
+using Prism.Commands;
 using Prism.Navigation;
+using System;
 using System.Collections.ObjectModel;
 
 namespace OnSale.Prism.ViewModels
 {
     public class ProductDetailPageViewModel : ViewModelBase
     {
+        private readonly INavigationService _navigationService;
         private ProductResponse _product;
         private ObservableCollection<ProductImage> _images;
+        private DelegateCommand _addToCartCommand;
+
         public ProductDetailPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
+            _navigationService = navigationService;
             Title = "Details";
         }
 
+        public DelegateCommand AddToCartCommand => _addToCartCommand ?? (_addToCartCommand = new DelegateCommand(AddToCartAsycn));
+
+       
         public ObservableCollection<ProductImage> Images
         {
             get => _images;
@@ -38,5 +48,16 @@ namespace OnSale.Prism.ViewModels
                 Images = new ObservableCollection<ProductImage>(Product.ProductImages);
             }
         }
+
+        private async void AddToCartAsycn()
+        {
+            NavigationParameters parameters = new NavigationParameters
+            {
+                { "product", Product }
+            };
+
+            await _navigationService.NavigateAsync(nameof(AddToCartPage), parameters);
+        }
+
     }
 }
