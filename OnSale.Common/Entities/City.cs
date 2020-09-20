@@ -8,6 +8,7 @@ namespace OnSale.Common.Entities
     {
         public int Id { get; set; }
 
+        [Display(Name = "City")]
         [MaxLength(50, ErrorMessage = "The field {0} can not contain more than {1} characteres.")]
         [Required]
         public string Name { get; set; }

@@ -10,13 +10,14 @@ namespace OnSale.Common.Entities
     {
         public int Id { get; set; }
 
+        [Display(Name = "Department")]
         [MaxLength(50, ErrorMessage = "The field {0} must contain less than {1} characteres.")]
         [Required]
         public string Name { get; set; }
 
         public ICollection<City> Cities { get; set; }
 
-        [DisplayName("Cities Number")]
+        [DisplayName("City Count")]
         public int CitiesNumber => Cities == null ? 0 : Cities.Count;
 
         [JsonIgnore]
