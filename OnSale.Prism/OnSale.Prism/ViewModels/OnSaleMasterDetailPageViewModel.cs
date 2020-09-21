@@ -73,7 +73,7 @@ namespace OnSale.Prism.ViewModels
             {
                 Icon = "ic_history",
                 PageName = $"{nameof(ShowHistoryPage)}",
-                Title = "Sales History",
+                Title = "Orders History",
                 IsLoginRequired = true
             },
             new Menu

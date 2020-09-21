@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnSale.Common.Enums;
 using OnSale.Common.Responses;
 using OnSale.Web.Data;
 using OnSale.Web.Data.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace OnSale.Web.Controllers.API
 {
@@ -74,5 +74,73 @@ namespace OnSale.Web.Controllers.API
             await _context.SaveChangesAsync();
             return Ok(order);
         }
+
+
+        // Method for the client to view his orders history
+        [HttpGet]
+        public async Task<IActionResult> GetOrders()
+        {
+            string email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            User user = await _userHelper.GetUserAsync(email);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            List<Order> orders = await _context.Orders
+                .Include(o => o.User)
+                .ThenInclude(u => u.City)
+                .Include(o => o.OrderDetails)
+                .ThenInclude(od => od.Product)
+                .ThenInclude(od => od.Category)
+                .Include(o => o.OrderDetails)
+                .ThenInclude(od => od.Product)
+                .ThenInclude(od => od.ProductImages)
+                .Where(o => o.User.Id == user.Id)
+                .OrderByDescending(o => o.Date)
+                .ToListAsync();
+            return Ok(orders);
+        }
+
+
+        //Method to modify or cancel an order by the user
+        [HttpPut]
+        public async Task<IActionResult> PutOrders([FromBody] Order order)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            string email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            User user = await _userHelper.GetUserAsync(email);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            Order currentOrder = await _context.Orders
+                .Include(o => o.User)
+                .ThenInclude(u => u.City)
+                .Include(o => o.OrderDetails)
+                .ThenInclude(od => od.Product)
+                .ThenInclude(od => od.Category)
+                .Include(o => o.OrderDetails)
+                .ThenInclude(od => od.Product)
+                .ThenInclude(od => od.ProductImages)
+                .FirstOrDefaultAsync(o => o.Id == order.Id && o.User.Id == user.Id);
+            if (currentOrder == null)
+            {
+                return NotFound();
+            }
+
+            currentOrder.OrderStatus = order.OrderStatus;
+            currentOrder.Remarks = order.Remarks;
+            _context.Orders.Update(currentOrder);
+            await _context.SaveChangesAsync();
+            return Ok(currentOrder);
+        }
+
+
     }
 }

@@ -41,7 +41,7 @@ namespace OnSale.Web.Data.Entities
 
         public ICollection<Qualification> Qualifications { get; set; }
 
-        [DisplayName("Product Qualifications")]
+        [DisplayName("Rating Count")]
         public int ProductQualifications => Qualifications == null ? 0 : Qualifications.Count;
 
         [DisplayFormat(DataFormatString = "{0:N2}")]
